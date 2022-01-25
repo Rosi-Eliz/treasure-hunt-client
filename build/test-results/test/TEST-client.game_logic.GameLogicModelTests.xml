@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="client.game_logic.GameLogicModelTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-12T14:45:24" hostname="Rosis-MacBook-Pro.local" time="0.602">
+  <properties/>
+  <testcase name="Test generate and process half map" classname="client.game_logic.GameLogicModelTests" time="0.602"/>
+  <system-out><![CDATA[[G][G][G][G][G][G][G][G]
+[G][G][G][G][G][G][G][G]
+[G][G][G][G][G][G][G][G]
+[G][G][G][G][G][G][G][G]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

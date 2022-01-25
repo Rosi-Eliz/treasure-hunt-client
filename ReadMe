@@ -1,0 +1,19 @@
+# Map Generation
+The map generation algorithm takes a more sophisticated brute - force approach. It is implemented in the AIEngineMapGenerator. The algorithm first randomly generates the minimum required field of every terrain type. The case of assigning a water field is handled more specifically - it is checked whether an island is created and whether the border rules are violated. Finally, the remaining fields are assigned to grass in order to ease map exploration and the castle is randomly assigned to a grass field.
+
+# Pathfinding
+Map exploration happens on a modified random principle. (AIEngineMapExplorer) The AI first explores the yet unvisited fields in his own half of the map, prioritising the mountain fields as they reveal a bigger part of the map. Once the treasure is picked up, the shortest path finding mode is enabled - A  weighted graph is constructed from the fields of the map, where the weights of the edges are the steps necessary to enter a field. Water fields are omitted as to make sure that the AI never loses the game by entering a water field. The shortest path is calculated by implementing Dijkstra’s algorithm. (AIEngineShortestPath)
+
+# Networking layer
+The NetworkManager class provides a generic implementation of a GET and POST request. Every package has a NetworkHandler, contained by the Model, that routes the request to the manager and sets provides the parameters to it.
+The map converter is implemented in the GameLogic package and transforms a field to a halfMapNode and a fullMapNode to a field
+ in order to provide full compatibility between the map as a provided classes and the GameMap as a custom defined classes. Once the map has been generated, it is converted to a halfMap and sent to the server. Similarly, once a response from the server is received with the full map, it is translated to a gameMap in order to be able to perform map exploration / shortest path finding.
+
+# MVC
+The game logic and player registration package follow the MVC pattern. In order to manage the lifecycle of the components of the pattern, a configurator class is created that initialises the model, view, controller and supplies them with relevant parameters (e.g. gameID, playerID). Communication between model and view is achieved with Java PropertyChangeListeners - the view registers at the model and starts listening for updates. Once a notifying event has been received the view renders itself with the new data.
+
+# Remarks
+The Coordinator class controls the game flow, i.e. waits for the registration of the two players and then initiates the game logic.
+
+# Optional steps
+A UI implemented with Swing for a nicer visualisation, easier debugging and enhanced user experience that can be enabled in the GameLogicView.
